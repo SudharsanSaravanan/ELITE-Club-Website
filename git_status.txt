@@ -1,0 +1,12 @@
+05a0542 Full workspace - backend integration complete
+067b515 Backend integration with marble theme
+cc81d4d first commit
+ab51797 mobile responsive
+4a2b37a new colour theme and revised home page
+origin	https://github.com/samithreddychinni/ELITE-Club-Website.git (fetch)
+origin	https://github.com/samithreddychinni/ELITE-Club-Website.git (push)
+  main
+* my-changes
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/main
+  remotes/origin/my-changes

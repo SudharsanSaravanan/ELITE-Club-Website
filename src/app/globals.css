@@ -1,0 +1,243 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #F5F5F7;
+  --color-foreground: #111111;
+  --color-muted: #666666;
+  --color-primary: #D4AF37;
+  --color-gold: #D4AF37;
+  --color-gold-dim: #B8960C;
+  --color-card: rgba(255, 255, 255, 0.7);
+  --color-card-border: rgba(255, 255, 255, 0.5);
+
+  --font-clash: "Clash Display", sans-serif;
+  --font-satoshi: "Satoshi", sans-serif;
+}
+
+:root {
+  --background: #F5F5F7;
+  --foreground: #111111;
+  --muted: #666666;
+  --primary: #D4AF37;
+  --card: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(255, 255, 255, 0.5);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Satoshi", sans-serif;
+  overflow-x: hidden;
+}
+
+.font-satoshi {
+  font-family: "Satoshi", sans-serif;
+}
+
+.font-clash {
+  font-family: "Clash Display", sans-serif;
+}
+
+::selection {
+  background-color: #D4AF37;
+  color: #111111;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8E8EA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CCCCCC;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #F2D06B 50%, #D4AF37 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #DDDDDD;
+  }
+}
+
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Expand Letter Hover Effect (CSS-based, inspired by Online Tutorials) */
+.expand-letter-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.expand-letter {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 1;
+  transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.expand-letter .first-letter {
+  display: inline-block;
+}
+
+.expand-letter .rest-of-word {
+  display: inline-block;
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  white-space: nowrap;
+  font-size: 0.6em;
+  vertical-align: baseline;
+  transition: max-width 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+    opacity 0.4s ease;
+}
+
+.expand-letter-container:hover .rest-of-word {
+  max-width: 600px;
+  opacity: 1;
+}
+
+.expand-letter-container:hover .expand-letter {
+  transform: scale(1.02);
+}
+
+/* Mobile: tap to expand */
+@media (max-width: 768px) {
+  .expand-letter {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+
+  .expand-letter .rest-of-word {
+    font-size: 0.45em;
+  }
+
+  /* Tap to expand on mobile */
+  .expand-letter-container.expanded .rest-of-word {
+    max-width: 300px;
+    opacity: 1;
+  }
+
+  /* Disable hover effect on mobile */
+  .expand-letter-container:hover .rest-of-word {
+    max-width: 0;
+    opacity: 0;
+  }
+
+  .expand-letter-container.expanded:hover .rest-of-word {
+    max-width: 300px;
+    opacity: 1;
+  }
+}
