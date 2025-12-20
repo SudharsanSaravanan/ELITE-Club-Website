@@ -7,6 +7,7 @@ import { CustomCursor, MagneticWrapper } from "@/components/ui/Cursor";
 import Preloader from "@/components/ui/Preloader";
 import TiltCard from "@/components/ui/TiltCard";
 import MegaFooter from "@/components/ui/MegaFooter";
+import UserNav from "@/components/UserNav";
 
 const navItems = [
     { label: "Home", href: "/" },
@@ -263,7 +264,7 @@ export default function Home() {
         <main className="min-h-screen relative">
             <Preloader />
             <CustomCursor />
-            <FloatingDock items={navItems} />
+            <FloatingDock items={navItems} action={<UserNav />} />
 
             {/* Section 1: ELITE Expand Hero */}
             <section className="min-h-screen flex items-center justify-center px-4 py-16 md:py-0 relative z-10">

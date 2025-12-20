@@ -7,7 +7,7 @@ interface LoginButtonProps {
     redirectTo?: string;
 }
 
-export default function LoginButton({ redirectTo }: LoginButtonProps) {
+export default function LoginButton({ redirectTo, className }: LoginButtonProps & { className?: string }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -48,7 +48,7 @@ export default function LoginButton({ redirectTo }: LoginButtonProps) {
             <button
                 onClick={handleLogin}
                 disabled={loading}
-                className="px-6 py-3 bg-primary text-foreground font-semibold rounded-full hover:scale-105 transition-transform disabled:opacity-50 whitespace-nowrap shadow-md flex items-center gap-2"
+                className={`px-6 py-3 bg-primary text-foreground font-semibold rounded-full hover:scale-105 transition-transform disabled:opacity-50 whitespace-nowrap shadow-md flex items-center gap-2 ${className}`}
             >
                 <svg className="w-5 h-5" viewBox="0 0 21 21" fill="currentColor">
                     <rect x="1" y="1" width="9" height="9" />
@@ -56,7 +56,8 @@ export default function LoginButton({ redirectTo }: LoginButtonProps) {
                     <rect x="1" y="11" width="9" height="9" />
                     <rect x="11" y="11" width="9" height="9" />
                 </svg>
-                {loading ? 'Redirecting...' : 'Continue with Microsoft'}
+                {/* {loading ? 'Redirecting...' : 'Continue with Microsoft'} */}
+                <span className={className?.includes('p-') ? 'hidden' : ''}>{loading ? 'Redirecting...' : 'Continue with Microsoft'}</span>
             </button>
         </div>
     );

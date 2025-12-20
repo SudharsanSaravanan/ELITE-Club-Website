@@ -13,9 +13,10 @@ interface NavItem {
 interface FloatingDockProps {
     items: NavItem[];
     className?: string;
+    action?: React.ReactNode;
 }
 
-export function FloatingDock({ items, className = "" }: FloatingDockProps) {
+export function FloatingDock({ items, className = "", action }: FloatingDockProps) {
     const [isVisible, setIsVisible] = useState(true);
     const [isHovering, setIsHovering] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -76,6 +77,12 @@ export function FloatingDock({ items, className = "" }: FloatingDockProps) {
                         {items.map((item, index) => (
                             <DockItem key={item.href} item={item} index={index} />
                         ))}
+                        {action && (
+                            <>
+                                <div className="w-px h-8 bg-elite-silver/20 mx-1" />
+                                {action}
+                            </>
+                        )}
                     </motion.nav>
                 )}
             </AnimatePresence>
