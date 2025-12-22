@@ -42,11 +42,11 @@ Through keynote talks, fireside chats, and open Q&A, participants gain valuable 
 Whether you are a student, a young professional, or someone eager to grow, "Learn from Leaders" offers an opportunity to learn directly from those who've walked the path of success and are shaping the future.`,
         date: "17 October 2024",
         images: [
-            "/events/learn-from-leaders/1.jpg",
-            "/events/learn-from-leaders/2.jpg",
-            "/events/learn-from-leaders/3.jpg",
-            "/events/learn-from-leaders/4.jpg",
-            "/events/learn-from-leaders/5.jpg"
+            "/events/learn-from-leaders/img1.jpg",
+            "/events/learn-from-leaders/img2.jpg",
+            "/events/learn-from-leaders/img3.jpg",
+            "/events/learn-from-leaders/img4.jpg",
+            "/events/learn-from-leaders/img5.jpg"
         ],
         category: "Flagship Event"
     },
