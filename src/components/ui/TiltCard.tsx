@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 interface TiltCardProps {
@@ -10,6 +10,14 @@ interface TiltCardProps {
 
 export default function TiltCard({ children, className = "" }: TiltCardProps) {
     const ref = useRef<HTMLDivElement>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
     const x = useMotionValue(0);
     const y = useMotionValue(0);
@@ -46,9 +54,9 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
     return (
         <motion.div
             ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{
+            onMouseMove={isMobile ? undefined : handleMouseMove}
+            onMouseLeave={isMobile ? undefined : handleMouseLeave}
+            style={isMobile ? undefined : {
                 rotateY,
                 rotateX,
                 transformStyle: "preserve-3d",
@@ -56,7 +64,7 @@ export default function TiltCard({ children, className = "" }: TiltCardProps) {
             className={`relative transition-all duration-200 ease-linear ${className}`}
         >
             <div
-                style={{
+                style={isMobile ? undefined : {
                     transform: "translateZ(20px)",
                     transformStyle: "preserve-3d",
                 }}

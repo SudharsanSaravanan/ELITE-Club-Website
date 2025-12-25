@@ -76,7 +76,7 @@ export function FloatingDock({ items, className = "", action }: FloatingDockProp
 
     return (
         <div
-            className={`fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-40 ${className}`}
+            className={`fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-40 pb-[env(safe-area-inset-bottom)] ${className}`}
         >
             {/* Mobile expanded menu */}
             <AnimatePresence>

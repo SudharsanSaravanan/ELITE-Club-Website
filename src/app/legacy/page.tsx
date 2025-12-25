@@ -204,7 +204,7 @@ const EventImageSlider = ({ images, title }: EventImageSliderProps) => {
                         <button
                             key={index}
                             onClick={() => handleDotClick(index)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImage
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImage
                                 ? 'bg-primary w-6'
                                 : 'bg-white/50 hover:bg-white/80'
                                 }`}
@@ -527,7 +527,7 @@ export default function LegacyPage() {
                             </p>
                         </div>
 
-                        <div className="flex flex-wrap justify-center gap-3 mb-12">
+                        <div className="flex overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible justify-start sm:justify-center gap-2 sm:gap-3 mb-12 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0">
                             {categories.map((category) => (
                                 <button
                                     key={category}
@@ -639,7 +639,7 @@ export default function LegacyPage() {
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             className="bg-gradient-to-br from-primary via-primary to-primary/70 rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto border border-primary/30 shadow-2xl shadow-primary/20"
                         >
-                            <div className="p-6 md:p-8">
+                            <div className="p-4 sm:p-6 md:p-8">
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
                                         <span className="px-3 py-1.5 rounded-full bg-white/20 text-black text-sm font-medium mb-3 inline-block border border-primary/50">

@@ -56,8 +56,8 @@ export default function LoginButton({ redirectTo, className }: LoginButtonProps 
                     <rect x="1" y="11" width="9" height="9" />
                     <rect x="11" y="11" width="9" height="9" />
                 </svg>
-                <span className={`${className?.includes('p-') ? 'hidden' : ''} hidden xs:inline sm:inline`}>
-                    {loading ? 'Redirecting...' : 'Sign in'}
+                <span className={`${className?.includes('p-') ? 'hidden' : ''}`}>
+                    {loading ? 'Redirecting...' : 'Login'}
                 </span>
             </button>
         </div>

@@ -13,7 +13,7 @@ export default function MegaFooter() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h2 className="font-clash text-3xl font-bold uppercase leading-none text-[#111827] sm:text-5xl md:text-7xl lg:text-[10rem]">
+                    <h2 className="font-clash text-3xl font-bold uppercase leading-none text-[#111827] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[10rem]">
                         Ready to Lead?
                     </h2>
                 </motion.div>
