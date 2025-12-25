@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import EventCard from '@/components/events/EventCard';
 import { FloatingDock } from "@/components/ui/FloatingDock";
+import UserNav from "@/components/UserNav";
 
 const navItems = [
     { label: "Home", href: "/" },
@@ -51,7 +52,7 @@ export default async function EventsPage() {
 
     return (
         <main className="min-h-screen bg-background pt-24 px-4 sm:px-6 lg:px-8 pb-32">
-            <FloatingDock items={navItems} />
+            <FloatingDock items={navItems} action={<UserNav />} />
 
             <div className="max-w-7xl mx-auto">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4 font-clash">

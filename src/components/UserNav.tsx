@@ -17,7 +17,7 @@ export default function UserNav() {
         const getUser = async () => {
             const { data: { user } } = await supabase.auth.getUser();
             setUser(user);
-            
+
             if (user) {
                 const { data } = await supabase
                     .from('profiles')
@@ -62,17 +62,17 @@ export default function UserNav() {
     }
 
     return (
-        <div className="flex items-center gap-2 px-2">
+        <div className="flex items-center gap-1 sm:gap-2 px-1 sm:px-2">
             {(profile?.role === 'admin' || profile?.role === 'lead') && (
                 <Link
                     href="/admin/events"
-                    className="px-3 py-1 text-xs bg-foreground text-background font-semibold rounded-full hover:scale-105 transition-transform whitespace-nowrap"
+                    className="px-2 sm:px-3 py-1 text-[10px] sm:text-xs bg-foreground text-background font-semibold rounded-full hover:scale-105 transition-transform whitespace-nowrap"
                 >
                     Admin
                 </Link>
             )}
-            <div className="text-sm hidden sm:block">
-                <span className="text-muted">Hello, </span>
+            <div className="text-xs sm:text-sm hidden sm:block">
+                <span className="text-muted">Hi, </span>
                 <span className="text-foreground font-medium">
                     {profile?.full_name?.split(' ')[0] || 'User'}
                 </span>

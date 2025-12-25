@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FloatingDock } from "@/components/ui/FloatingDock";
 import { CustomCursor } from "@/components/ui/Cursor";
+import UserNav from "@/components/UserNav";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -168,7 +169,7 @@ export default function TeamPage() {
     return (
         <main className="min-h-screen pt-24 pb-32">
             <CustomCursor />
-            <FloatingDock items={navItems} />
+            <FloatingDock items={navItems} action={<UserNav />} />
 
             <section ref={headerRef} className="container mx-auto px-8 mb-16 text-center">
                 <h1

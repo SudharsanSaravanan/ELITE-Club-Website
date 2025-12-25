@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import DynamicForm from '@/components/events/DynamicForm';
 import { submitApplication } from './actions';
 import { FloatingDock } from "@/components/ui/FloatingDock";
+import UserNav from "@/components/UserNav";
 
 const navItems = [
     { label: "Home", href: "/" },
@@ -30,7 +31,7 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
     if (!profile) {
         return (
             <div className="min-h-screen bg-background pt-32 px-4 flex flex-col items-center justify-center text-center">
-                <FloatingDock items={navItems} />
+                <FloatingDock items={navItems} action={<UserNav />} />
                 <div className="glass border border-card-border rounded-2xl p-8 shadow-lg max-w-lg w-full">
                     <h1 className="text-3xl font-bold text-primary mb-4 font-clash">Profile Missing</h1>
                     <p className="text-muted mb-8">
@@ -67,7 +68,7 @@ export default async function ApplyPage({ params }: { params: Promise<{ slug: st
 
     return (
         <main className="min-h-screen bg-background pt-24 px-4 sm:px-6 lg:px-8 pb-32">
-            <FloatingDock items={navItems} />
+            <FloatingDock items={navItems} action={<UserNav />} />
             <div className="max-w-3xl mx-auto">
                 <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-2 font-clash">
                     Apply for {event.title}
