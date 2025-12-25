@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { FloatingDock } from "@/components/ui/FloatingDock";
 import LoginButton from "@/components/LoginButton";
+import UserNav from "@/components/UserNav";
 
 const navItems = [
     { label: "Home", href: "/" },
@@ -49,7 +50,7 @@ function LoginContent() {
 export default function LoginPage() {
     return (
         <main className="min-h-screen bg-background flex items-center justify-center px-4">
-            <FloatingDock items={navItems} />
+            <FloatingDock items={navItems} action={<UserNav />} />
             <Suspense fallback={
                 <div className="glass border border-card-border rounded-2xl p-8 max-w-md w-full text-center shadow-2xl">
                     <div className="animate-pulse">Loading...</div>

@@ -126,7 +126,7 @@ export default function EventCard({ event, userRole, registrationStatus, isLogge
                     {event.description || 'No description available.'}
                 </p>
 
-                <div className="flex items-center justify-end">
+                <div className="flex items-center justify-center sm:justify-end">
                     {getButton()}
                 </div>
             </div>

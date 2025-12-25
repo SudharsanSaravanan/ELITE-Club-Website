@@ -7,6 +7,7 @@ import { FloatingDock } from "@/components/ui/FloatingDock";
 import { CustomCursor } from "@/components/ui/Cursor";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import UserNav from "@/components/UserNav";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,28 +91,28 @@ The mechanics of the challenge: participants start with virtual capital and comp
 ];
 
 const coreValues = [
-    { 
-        title: "Integrity", 
+    {
+        title: "Integrity",
         description: "Upholding honesty and strong moral principles in all endeavours.",
         image: "/values/Integrity.png"
     },
-    { 
-        title: "Collaboration", 
+    {
+        title: "Collaboration",
         description: "Fostering teamwork and open communication among members.",
         image: "/values/Collaboration.png"
     },
-    { 
-        title: "Inclusivity", 
+    {
+        title: "Inclusivity",
         description: "Ensuring a welcoming environment for individuals of all backgrounds.",
         image: "/values/Inclusivity.png"
     },
-    { 
-        title: "Excellence", 
+    {
+        title: "Excellence",
         description: "Striving for the highest standards in projects and initiatives.",
         image: "/values/Excellence.png"
     },
-    { 
-        title: "Responsibility", 
+    {
+        title: "Responsibility",
         description: "Being accountable for actions and their impact on the community.",
         image: "/values/Responsibility.png"
     }
@@ -203,11 +204,10 @@ const EventImageSlider = ({ images, title }: EventImageSliderProps) => {
                         <button
                             key={index}
                             onClick={() => handleDotClick(index)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                index === currentImage 
-                                    ? 'bg-primary w-6' 
-                                    : 'bg-white/50 hover:bg-white/80'
-                            }`}
+                            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImage
+                                ? 'bg-primary w-6'
+                                : 'bg-white/50 hover:bg-white/80'
+                                }`}
                         />
                     ))}
                 </div>
@@ -232,17 +232,17 @@ export default function LegacyPage() {
 
     useEffect(() => {
         const tl = gsap.timeline();
-        
+
         tl.set(pageRevealRef.current, {
             scaleY: 1,
             transformOrigin: "bottom center"
         })
-        .to(pageRevealRef.current, {
-            scaleY: 0,
-            duration: 1.2,
-            ease: "power3.inOut",
-            delay: 0.2
-        });
+            .to(pageRevealRef.current, {
+                scaleY: 0,
+                duration: 1.2,
+                ease: "power3.inOut",
+                delay: 0.2
+            });
 
         const ctx = gsap.context(() => {
             gsap.from(".bg-pattern", {
@@ -262,19 +262,19 @@ export default function LegacyPage() {
             });
 
             const letters = titleRef.current
-  ? Array.from(titleRef.current.querySelectorAll('.letter'))
-  : [];
+                ? Array.from(titleRef.current.querySelectorAll('.letter'))
+                : [];
 
-if (letters.length === 0) return;
+            if (letters.length === 0) return;
 
-gsap.from(letters, {
-  opacity: 0,
-  y: 40,
-  duration: 0.6,
-  stagger: 0.02,
-  ease: "power2.out",
-  delay: 0.8,
-});
+            gsap.from(letters, {
+                opacity: 0,
+                y: 40,
+                duration: 0.6,
+                stagger: 0.02,
+                ease: "power2.out",
+                delay: 0.8,
+            });
 
             gsap.utils.toArray(".section-container").forEach((section: any, i) => {
                 gsap.from(section, {
@@ -312,15 +312,15 @@ gsap.from(letters, {
         };
     }, []);
 
-    const filteredEvents = activeFilter === "All" 
-        ? legacyEvents 
+    const filteredEvents = activeFilter === "All"
+        ? legacyEvents
         : legacyEvents.filter(event => event.category === activeFilter);
 
     const categories = ["All", ...Array.from(new Set(legacyEvents.map(event => event.category)))];
 
     return (
         <>
-            <div 
+            <div
                 ref={pageRevealRef}
                 className="fixed inset-0 bg-gradient-to-b from-white to-gray-50 z-[100] pointer-events-none"
                 style={{
@@ -330,7 +330,7 @@ gsap.from(letters, {
 
             <main className="min-h-screen bg-background text-foreground relative overflow-hidden">
                 <CustomCursor />
-                <FloatingDock items={navItems} />
+                <FloatingDock items={navItems} action={<UserNav />} />
 
                 <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0 bg-pattern">
                     <div className="absolute inset-0" style={{
@@ -354,7 +354,7 @@ gsap.from(letters, {
                                 </h1>
                             </div>
 
-                            <motion.p 
+                            <motion.p
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 1.2, duration: 0.8 }}
@@ -373,12 +373,12 @@ gsap.from(letters, {
                             <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg transition-all duration-500 group-hover:border-primary/60"></div>
                             <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-primary/40 rounded-bl-lg transition-all duration-500 group-hover:border-primary/60"></div>
                             <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-primary/40 rounded-br-lg transition-all duration-500 group-hover:border-primary/60"></div>
-                            
+
                             <div className="absolute -inset-4 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                            
+
                             <div className="relative bg-gradient-to-br from-primary/5 via-background to-primary/10 p-8 md:p-12 rounded-2xl border border-primary/20 shadow-2xl shadow-primary/10 backdrop-blur-sm">
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary/10 opacity-20"></div>
-                                
+
                                 <div className="relative z-10">
                                     <div className="flex flex-col md:flex-row md:items-start gap-8">
                                         <div className="md:w-2/5">
@@ -387,7 +387,7 @@ gsap.from(letters, {
                                                     <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                                                     <span className="text-sm font-medium text-primary font-clash">ABOUT ELITE</span>
                                                 </div>
-                                                
+
                                                 <div className="relative">
                                                     <div className="absolute -left-4 top-0 text-5xl text-primary/20 font-serif">"</div>
                                                     <div className="relative pl-6 md:pl-8 border-l-2 border-primary/40">
@@ -400,11 +400,11 @@ gsap.from(letters, {
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="md:w-3/5">
                                             <div className="space-y-5">
                                                 <p className="text-foreground leading-relaxed text-base md:text-lg">
-                                                    The acronym <span className="text-primary font-semibold font-clash">"ELITE"</span> encapsulates our core principles: 
+                                                    The acronym <span className="text-primary font-semibold font-clash">"ELITE"</span> encapsulates our core principles:
                                                     <span className="text-primary font-medium font-clash"> Entrepreneurship, Leadership, Innovation, Training, and Exposure.</span>
                                                 </p>
                                                 <p className="text-foreground leading-relaxed">
@@ -527,14 +527,14 @@ gsap.from(letters, {
                             </p>
                         </div>
 
-                        <div className="flex flex-wrap justify-center gap-3 mb-12">
+                        <div className="flex overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible justify-start sm:justify-center gap-2 sm:gap-3 mb-12 scrollbar-hide -mx-6 px-6 sm:mx-0 sm:px-0">
                             {categories.map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setActiveFilter(category)}
                                     className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === category
-                                            ? 'bg-gradient-to-r from-primary to-primary/80 text-background shadow-lg shadow-primary/25'
-                                            : 'glass text-muted hover:text-foreground hover:bg-white/5 border border-white/10'
+                                        ? 'bg-gradient-to-r from-primary to-primary/80 text-background shadow-lg shadow-primary/25'
+                                        : 'glass text-muted hover:text-foreground hover:bg-white/5 border border-white/10'
                                         }`}
                                 >
                                     {category}
@@ -542,53 +542,53 @@ gsap.from(letters, {
                             ))}
                         </div>
                         <div className="grid md:grid-cols-2 gap-8 stagger-card">
-                        {filteredEvents.map((event) => (
-                            <div key={event.id} className="group">
-                                <div className="relative glass overflow-hidden rounded-2xl h-full border border-white/10 hover-lift transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
-                               <EventImageSlider
-                                    key={event.id}
-                                    images={event.images}
-                                    title={event.title}
-                                    />
+                            {filteredEvents.map((event) => (
+                                <div key={event.id} className="group">
+                                    <div className="relative glass overflow-hidden rounded-2xl h-full border border-white/10 hover-lift transition-all duration-300 hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10">
+                                        <EventImageSlider
+                                            key={event.id}
+                                            images={event.images}
+                                            title={event.title}
+                                        />
 
-                                <div className="absolute top-4 left-4 z-10">
-                                <span className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-primary text-xs font-medium border border-primary/90">
-                                    {event.category}
-                                </span>
+                                        <div className="absolute top-4 left-4 z-10">
+                                            <span className="px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-sm text-primary text-xs font-medium border border-primary/90">
+                                                {event.category}
+                                            </span>
+                                        </div>
+
+                                        <div className="p-6">
+                                            <h3 className="text-2xl font-clash font-semibold mb-2">
+                                                {event.title}
+                                            </h3>
+
+                                            <p className="text-sm text-primary/90 mb-3">
+                                                {event.date}
+                                            </p>
+
+                                            <p className="text-muted mb-5 line-clamp-2">
+                                                {event.description}
+                                            </p>
+
+                                            <div className="flex items-center justify-between pt-5 border-t border-white/10">
+                                                <span className="text-sm text-primary/70 font-medium">
+
+                                                </span>
+
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedEvent(event);
+                                                    }}
+                                                    className="text-sm font-medium text-primary hover:translate-x-1 transition-transform"
+                                                >
+                                                    Learn more →
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div className="p-6">
-                                <h3 className="text-2xl font-clash font-semibold mb-2">
-                                    {event.title}
-                                </h3>
-
-                                <p className="text-sm text-primary/90 mb-3">
-                                    {event.date}
-                                </p>
-
-                                <p className="text-muted mb-5 line-clamp-2">
-                                    {event.description}
-                                </p>
-
-                                <div className="flex items-center justify-between pt-5 border-t border-white/10">
-                                    <span className="text-sm text-primary/70 font-medium">
-                                    
-                                    </span>
-
-                                    <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedEvent(event);
-                                    }}
-                                    className="text-sm font-medium text-primary hover:translate-x-1 transition-transform"
-                                    >
-                                    Learn more →
-                                    </button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        ))}
+                            ))}
                         </div>
                     </div>
                 </section>
@@ -602,7 +602,7 @@ gsap.from(letters, {
                                 </h3>
                                 <p className="text-muted text-sm italic">The compass that directs our decisions and actions</p>
                             </div>
-                            
+
                             <div className="grid md:grid-cols-2 gap-4">
                                 {guidingPrinciples.map((principle, index) => (
                                     <div key={index} className="group relative overflow-hidden">
@@ -612,7 +612,7 @@ gsap.from(letters, {
                                                     <span className="text-primary font-bold text-sm">{index + 1}</span>
                                                 </div>
                                             </div>
-                                            
+
                                             <div className="flex-1 min-w-0">
                                                 <h4 className="font-semibold text-primary mb-1 text-sm md:text-base leading-tight">
                                                     {principle.split(':')[0]}
@@ -622,7 +622,7 @@ gsap.from(letters, {
                                                 </p>
                                             </div>
                                         </div>
-                                        
+
                                         <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300 ease-out"></div>
                                     </div>
                                 ))}
@@ -639,7 +639,7 @@ gsap.from(letters, {
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             className="bg-gradient-to-br from-primary via-primary to-primary/70 rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto border border-primary/30 shadow-2xl shadow-primary/20"
                         >
-                            <div className="p-6 md:p-8">
+                            <div className="p-4 sm:p-6 md:p-8">
                                 <div className="flex justify-between items-start mb-6">
                                     <div>
                                         <span className="px-3 py-1.5 rounded-full bg-white/20 text-black text-sm font-medium mb-3 inline-block border border-primary/50">

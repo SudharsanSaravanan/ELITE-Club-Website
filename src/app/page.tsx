@@ -179,9 +179,8 @@ function BentoGrid() {
                     </TiltCard>
                 </motion.div>
 
-                {/* Card 3: Team Corps */}
                 <motion.div
-                    className=""
+                    className="col-span-1"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -214,9 +213,8 @@ function BentoGrid() {
                     </TiltCard>
                 </motion.div>
 
-                {/* Card 4: Join CTA */}
                 <motion.div
-                    className=""
+                    className="col-span-1"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

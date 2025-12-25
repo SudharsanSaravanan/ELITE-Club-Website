@@ -16,80 +16,142 @@ interface FloatingDockProps {
     action?: React.ReactNode;
 }
 
+// Hamburger menu icon component
+function HamburgerIcon({ isOpen }: { isOpen: boolean }) {
+    return (
+        <div className="w-5 h-5 flex flex-col justify-center items-center gap-1">
+            <motion.span
+                className="block w-4 h-0.5 bg-elite-silver rounded-full origin-center"
+                animate={{
+                    rotate: isOpen ? 45 : 0,
+                    y: isOpen ? 3 : 0,
+                }}
+                transition={{ duration: 0.2 }}
+            />
+            <motion.span
+                className="block w-4 h-0.5 bg-elite-silver rounded-full"
+                animate={{
+                    opacity: isOpen ? 0 : 1,
+                    scaleX: isOpen ? 0 : 1,
+                }}
+                transition={{ duration: 0.2 }}
+            />
+            <motion.span
+                className="block w-4 h-0.5 bg-elite-silver rounded-full origin-center"
+                animate={{
+                    rotate: isOpen ? -45 : 0,
+                    y: isOpen ? -3 : 0,
+                }}
+                transition={{ duration: 0.2 }}
+            />
+        </div>
+    );
+}
+
 export function FloatingDock({ items, className = "", action }: FloatingDockProps) {
-    const [isVisible, setIsVisible] = useState(true);
-    const [isHovering, setIsHovering] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
+    // Check if we're on mobile
     useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
+        const checkMobile = () => setIsMobile(window.innerWidth < 640);
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
+    }, []);
 
-            setIsVisible(true);
+    // Close mobile menu when clicking outside
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            const handleClickOutside = () => setIsMobileMenuOpen(false);
+            document.addEventListener("click", handleClickOutside);
+            return () => document.removeEventListener("click", handleClickOutside);
+        }
+    }, [isMobileMenuOpen]);
 
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-
-            const timeout = setTimeout(() => {
-                if (!isHovering) {
-                    setIsVisible(false);
-                }
-            }, 2000);
-
-            setScrollTimeout(timeout);
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-        };
-    }, [scrollTimeout, isHovering, lastScrollY]);
+    const handleMenuToggle = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
 
     return (
         <div
-            className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-40 ${className}`}
-            onMouseEnter={() => {
-                setIsHovering(true);
-                setIsVisible(true);
-            }}
-            onMouseLeave={() => setIsHovering(false)}
+            className={`fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-40 pb-[env(safe-area-inset-bottom)] ${className}`}
         >
+            {/* Mobile expanded menu */}
             <AnimatePresence>
-                {(isVisible || isHovering) && (
-                    <motion.nav
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: 100, opacity: 0 }}
+                {isMobile && isMobileMenuOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{
                             type: "spring",
-                            stiffness: 300,
+                            stiffness: 400,
                             damping: 30,
                         }}
-                        className="flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 md:px-4 py-2 sm:py-3 rounded-full bg-elite-dark/80 backdrop-blur-xl border border-elite-graphite/50 shadow-2xl"
+                        className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col gap-2 p-3 rounded-2xl bg-elite-dark/95 backdrop-blur-xl border border-elite-graphite/50 shadow-2xl min-w-[200px]"
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        {items.map((item, index) => (
-                            <DockItem key={item.href} item={item} index={index} />
+                        {items.map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="px-4 py-3 rounded-xl text-sm font-medium text-elite-silver hover:text-elite-gold hover:bg-elite-graphite/50 transition-all duration-200 text-center"
+                                style={{ fontFamily: "Satoshi, sans-serif" }}
+                            >
+                                {item.label}
+                            </Link>
                         ))}
                         {action && (
                             <>
-                                <div className="w-px h-8 bg-elite-silver/20 mx-1" />
-                                {action}
+                                <div className="h-px bg-elite-silver/20 my-1" />
+                                <div className="flex justify-center py-2">
+                                    {action}
+                                </div>
                             </>
                         )}
-                    </motion.nav>
+                    </motion.div>
                 )}
             </AnimatePresence>
 
-            {!isVisible && !isHovering && (
-                <div className="w-48 h-16 absolute bottom-0 left-1/2 -translate-x-1/2" />
-            )}
+            {/* Main dock - always visible */}
+            <motion.nav
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                }}
+                className="flex items-center gap-0.5 sm:gap-1 px-2 sm:px-3 md:px-4 py-2 sm:py-3 rounded-full bg-elite-dark/80 backdrop-blur-xl border border-elite-graphite/50 shadow-2xl"
+            >
+                {/* Mobile: hamburger menu button */}
+                {isMobile ? (
+                    <motion.button
+                        onClick={handleMenuToggle}
+                        className="px-3 py-2 rounded-full cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center hover:bg-elite-graphite/50 transition-colors"
+                        whileTap={{ scale: 0.95 }}
+                        aria-label="Toggle menu"
+                    >
+                        <HamburgerIcon isOpen={isMobileMenuOpen} />
+                    </motion.button>
+                ) : (
+                    /* Desktop: show all nav items */
+                    items.map((item, index) => (
+                        <DockItem key={item.href} item={item} index={index} />
+                    ))
+                )}
+
+                {/* Action area (UserNav) - shown on tablets and up */}
+                {!isMobile && action && (
+                    <>
+                        <div className="w-px h-8 bg-elite-silver/20 mx-1" />
+                        {action}
+                    </>
+                )}
+            </motion.nav>
         </div>
     );
 }
@@ -126,7 +188,7 @@ function DockItem({ item, index }: DockItemProps) {
                 />
 
                 <span
-                    className={`relative z-10 text-xs sm:text-sm font-medium transition-colors duration-200 ${isHovered ? "text-elite-gold" : "text-elite-silver"
+                    className={`relative z-10 text-xs sm:text-sm font-medium transition-colors duration-200 whitespace-nowrap ${isHovered ? "text-elite-gold" : "text-elite-silver"
                         }`}
                     style={{ fontFamily: "Satoshi, sans-serif" }}
                 >

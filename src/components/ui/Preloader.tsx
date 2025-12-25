@@ -34,7 +34,7 @@ export default function Preloader() {
                 >
                     <div className="flex flex-col items-center">
                         <motion.h1
-                            className="font-clash text-6xl md:text-9xl font-bold text-[#D4AF37]"
+                            className="font-clash text-6xl sm:text-7xl md:text-9xl font-bold text-[#D4AF37]"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                         >

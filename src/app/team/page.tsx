@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FloatingDock } from "@/components/ui/FloatingDock";
 import { CustomCursor } from "@/components/ui/Cursor";
+import UserNav from "@/components/UserNav";
 
 if (typeof window !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
@@ -168,7 +169,7 @@ export default function TeamPage() {
     return (
         <main className="min-h-screen pt-24 pb-32">
             <CustomCursor />
-            <FloatingDock items={navItems} />
+            <FloatingDock items={navItems} action={<UserNav />} />
 
             <section ref={headerRef} className="container mx-auto px-8 mb-16 text-center">
                 <h1
@@ -284,7 +285,7 @@ export default function TeamPage() {
                                 <div className="flex-1 h-px bg-elite-graphite/30" />
                             </div>
 
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                            <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                                 {dept.members.map((member) => (
                                     <div
                                         key={member.name}
@@ -310,11 +311,11 @@ export default function TeamPage() {
                                                 )}
                                             </div>
 
-                                            <h3 className="text-lg font-semibold text-[#3a3a30] group-hover:opacity-0 transition-opacity duration-300">
+                                            <h3 className="text-base sm:text-lg font-semibold text-[#3a3a30] group-hover:opacity-0 transition-opacity duration-300 truncate px-1">
                                                 {member.name}
                                             </h3>
 
-                                            <p className="text-xs font-medium mt-1 group-hover:opacity-0 transition-opacity duration-300 text-[#6a6a60]">
+                                            <p className="text-[10px] sm:text-xs font-medium mt-1 group-hover:opacity-0 transition-opacity duration-300 text-[#6a6a60] truncate px-1">
                                                 {member.role}
                                             </p>
                                         </div>
