@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FloatingDock } from "@/components/ui/FloatingDock";
 import { CustomCursor, MagneticWrapper } from "@/components/ui/Cursor";
-import Preloader from "@/components/ui/Preloader";
 import TiltCard from "@/components/ui/TiltCard";
 import MegaFooter from "@/components/ui/MegaFooter";
 import UserNav from "@/components/UserNav";
@@ -260,7 +259,7 @@ export default function Home() {
 
     return (
         <main className="min-h-screen relative">
-            <Preloader />
+            {/* Preloader REMOVED from here */}
             <CustomCursor />
             <FloatingDock items={navItems} action={<UserNav />} />
 

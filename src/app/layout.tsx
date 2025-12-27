@@ -3,6 +3,7 @@ import "./globals.css";
 import { BackgroundTexture } from "@/components/ui/BackgroundTexture";
 import NoiseOverlay from "@/components/effects/NoiseOverlay";
 import { Analytics } from "@vercel/analytics/next";
+import Preloader from "@/components/ui/Preloader";
 
 export const metadata: Metadata = {
   title: "ELITE Club | Where Leaders are Forged",
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground antialiased font-satoshi relative">
         <BackgroundTexture />
         <NoiseOverlay />
+        <Preloader />
         <div className="relative z-10">
           {children}
         </div>
